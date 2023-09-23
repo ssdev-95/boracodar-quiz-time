@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+:root {
+	/* Color scheme */
+	--gray-50: #d9d9d9;
+	--gray-100: #565e6d;
+	--gray-200: #252c3a;
+	--gray-300: #1d2330;
+	--gray-400: #181d28;
+	--gray-500: #161a24;
+	--green-100: #abf770;
+	--green-200: #5cad1d;
+	--red-100: #f77070;
+	--red-200: #ab3030;
+}
+
