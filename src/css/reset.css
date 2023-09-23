@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import url("./colors.css");
+
+* {
+  border: 0;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+
+	scroll-behavior: smooth;
+	transition: all .25s ease;
+}
+
+*:focus {
+	outline: 2px solid var(--gray-40p);
+}
+
+.sr-only {
+	width: 1px;
+	height: 1px;
+	opacity: .1;
+	transform: translateX(-100vw);
+}
+

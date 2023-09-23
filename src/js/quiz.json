@@ -1,0 +1,28 @@
+
+{
+	"questions": [
+		{
+			"category": "history",
+			"id": "63989c195c9a75021f310480",
+			"correctAnswer": "Absolute Monarchy",
+			"incorrectAnswers": [
+				"Democracy",
+				"Constitutional Monarchy",
+				"Parliamentary Democracy"
+			],
+			"question": {
+				"text": "What kind of government dominated most of Europe during the 17th century?"
+			},
+			"tags": [
+				"history",
+				"1600s",
+				"europe"
+			],
+			"type": "text_choice",
+			"difficulty": "medium",
+			"regions": [],
+			"isNiche": false
+		}
+	]
+}
+
