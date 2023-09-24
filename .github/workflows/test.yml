@@ -1,0 +1,27 @@
+# Deploy on github pages
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  list_folders:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: then builds
+        run: |
+          corepack enable
+          yarn
+          yarn build
+
+      - name: list folders
+        run: ls -la .
+
