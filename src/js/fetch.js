@@ -5,7 +5,10 @@
 //const API_URL = 'https://the-trivia-api.com/v2/questions?limit=15';
 import quiz from './quiz.json'
 
+export let questions = []
+
 export async function fetchQuestions() {
-	return quiz.questions;
+	questions = quiz.questions
+	return questions;
 }
 

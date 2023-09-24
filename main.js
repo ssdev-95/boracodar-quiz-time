@@ -9,7 +9,7 @@ import './src/css/quiz.css'
 
 import './src/js/eruda'
 import { loadIcons } from './src/js/lucide'
-import { loadQuiz } from './src/js/quiz'
+import { loadQuiz } from './src/js/quiz-load'
 
 document.querySelector('#app').innerHTML = `
 	<header id="header">

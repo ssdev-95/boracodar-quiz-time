@@ -83,6 +83,11 @@ html {
 	align-items: center;
 	justify-content: center;
 	gap: .25rem;
+
+	&[data-done-quizes=true] {
+		border-color: var(--green-200);
+		color: var(--green-200);
+	}
 }
 
 #content {
