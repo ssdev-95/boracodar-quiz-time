@@ -23,6 +23,6 @@ jobs:
         env:
           key: dev
           branches: prod
-          files: dist
+          files: dist/**/*
         #run: mv dist xSallus/boracodar-quiz-time/tree/prod
 
