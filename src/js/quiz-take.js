@@ -43,6 +43,10 @@ function handleShowAnswerCorrectness({
 			handleUpdateQuizDoneCountBadge()
 		}
 	})
+
+	document
+		.getElementById('next-question__icon')
+		.removeAttribute('disabled')
 }
 
 function handleUpdateQuizDoneCountBadge() {
@@ -55,4 +59,9 @@ function handleUpdateQuizDoneCountBadge() {
 	badge.setAttribute('data-done-quizes', !!count)
 	quizCount.innerText = count
 }
+
+document.getElementById('next-question__icon')
+  .addEventListener('click', () => {
+		alert('Carregando proxima questao, aguarde!!')
+	})
 

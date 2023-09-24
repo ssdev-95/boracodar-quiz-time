@@ -14,7 +14,7 @@ import { loadQuiz } from './src/js/quiz-load'
 document.querySelector('#app').innerHTML = `
 	<header id="header">
 	  <strong role="title" class="text-xl">
-		  Quiz<span>.time</span>
+		  👋 Quiz<span>.time</span>
 		</strong>
 
 		<div role="badge" data-done-quizes="false" id="quiz-done-count__badge">
