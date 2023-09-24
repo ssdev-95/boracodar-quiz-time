@@ -16,12 +16,17 @@ jobs:
         run: echo The PR was merged by ${{ github.actor }}
 
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
 
-      - name: then builds
+      - name: setup node
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
-        run: corepack enable && yarn && yarn build
+      
+      - name: then builds
+        run: |
+          corepack enable
+          yarn
+          yarn build
 
       - name: copy dist folder
         env:
