@@ -1,9 +1,13 @@
 # Deploy on github pages
+name: Deploy Github Pages - Test
 
 on:
   push:
     branches:
       - dev
+
+permissions:
+  contents: write
 
 jobs:
   test:
@@ -18,19 +22,8 @@ jobs:
           corepack enable
           yarn
           yarn build
-      - name: copy dist
-        env:
-          SRC_FOLDER_PATH: 'dist'
-          TARGET_BRANCH: 'prod'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch                         # fetch branches
-          git checkout -b $TARGET_BRANCH       # checkout to your branch
-          git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
-          git push origin $TARGET_BRANCH # push to remote branch
-
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
 
