@@ -71,9 +71,11 @@
 	aspect-ratio: 3/4;
 	padding-inline: 1rem;
 
-	border: solid var(--gray-100);
-	border-inline-width: 2.69px;
+	border-style: solid;
+	border-color: var(--gray-100);
 	border-top-width: 2.69px;
+	border-left-width: 2.69px;
+	border-right-width: 2.69px;
 	border-bottom-width: 3.39px;
 	border-radius: 8px;
 
@@ -103,6 +105,10 @@
 	position: absolute;
 	top: .75rem;
 	right: .75rem;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .q-answer__feedback > svg {
@@ -110,6 +116,39 @@
 }
 
 .q-answer__wrapper:has(input:checked) {
-	background-color: var(--gray-300);
+	color: #f0f2f5;
+	background-color: var(--gray-100);
+}
+
+.q-answer__wrapper:has(input:checked[data-correct=true]) {
+	border-color: var(--green-200);
+	background-color: initial;
+	
+	> .q-answer__feedback {
+		background-color: var(--green-200);
+		border-color: var(--green-200);
+
+		> svg[data-lucide=check] {
+			display: block;
+			filter: invert(100%);
+			opacity: .58;
+		}
+	}
+}
+
+.q-answer__wrapper:has(input:checked[data-correct=false]) {
+	border-color: var(--red-200);
+	background-color: initial;
+
+	> .q-answer__feedback {
+		background-color: var(--red-200);
+		border-color: var(--red-200);
+
+		> svg[data-lucide=x] {
+			display: block;
+			filter: invert(100%);
+			opacity: .58;
+		}
+	}
 }
 

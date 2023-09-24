@@ -73,16 +73,21 @@ html {
 
 #quiz-done-count__badge {
 	color: var(--gray-100);
-	border: 2px solid var(--gray-100);
+	border: 1px solid var(--gray-100);
 
 	min-width: 32px;
 	padding: .25rem .45rem;
-	border-radius: 99px;
+	border-radius: 8px;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: .25rem;
+
+	&[data-done-quizes=true] {
+		border-color: var(--green-200);
+		color: var(--green-200);
+	}
 }
 
 #content {
@@ -97,9 +102,35 @@ html {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	> strong {
+		font-weight: 400;
+
+		> span {
+			font-size: 1.35rem;
+			font-weight: 700;
+	  }
+	}
 }
 
-#footer > #next-question__icon {
-	color: var(--gray-200);
+#next-question__icon {
+	height: 2rem;
+	width: 2rem;
+	padding-left: 1px;
+
+	border-radius: 99px;
+	border-color: #00000000;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: var(--gray-100);
+	color: var(--gray-50);
+
+
+	&:disabled {
+		filter: brightness(.5);
+	}
 }
 

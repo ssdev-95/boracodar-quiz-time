@@ -6,7 +6,7 @@ export async function loadQuiz() {
 	console.log('Quiz questions loaded!')
 
 	const content = document.getElementById('content')
-	content.querySelector('#loading').remove()
+	content.innerText = ''
 
 	questions.forEach((question, index) => {
 		content.appendChild(
@@ -17,14 +17,14 @@ export async function loadQuiz() {
 	footer.setAttribute('id', 'footer')
 	footer.innerHTML = `
 	  <strong>
-		  Question (4/5)
+		  <span>1</span>/5
 		</strong>
 
-		<span id="next-question__icon">
+		<button disabled id="next-question__icon">
 		  <i data-lucide="chevron-right"></i>
-		</span>
+		</button>
 	`
-	content.appendChild(footer)
+	document.getElementById('app').appendChild(footer)
 }
 
 function renderQuestion({ id, question, correctAnswer, incorrectAnswers, index }) {
