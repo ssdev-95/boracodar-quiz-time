@@ -15,14 +15,15 @@ jobs:
       - name: pre deploy
         run: echo The PR was merged by ${{ github.actor }}
 
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
-        name: then builds
+
+      - name: then builds
         with:
           node-version: '18'
         run: corepack enable && yarn && yarn build
 
-      - uses: actions/checkout@v2
-        name: copy dist folder
+      - name: copy dist folder
         env:
           SRC_FOLDER_PATH: 'dist'
           TARGET_BRANCH: 'prod'
