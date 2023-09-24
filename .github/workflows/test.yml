@@ -18,5 +18,11 @@ jobs:
           corepack enable
           yarn
           yarn build
-      - run: mv dist xSallus/boracodar-quiz-time/tree/prod
+      - name: copy dist
+        uses: planetoftheweb/copy-to-branches@v1
+        env:
+          key: dev
+          branches: prod
+          files: dist
+        #run: mv dist xSallus/boracodar-quiz-time/tree/prod
 
