@@ -21,8 +21,7 @@ jobs:
         env:
           SRC_FOLDER_PATH: 'dist'
           TARGET_BRANCH: 'prod'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
+        run: files=$(find $SRC_FOLDER_PATH -type f) # get the file list
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
           git fetch                         # fetch branches
