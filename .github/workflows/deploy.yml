@@ -19,22 +19,21 @@ jobs:
         name: then builds
         with:
           node-version: '18'
-        run: corepack enable
-        run: yarn
-        run: yarn build
+        run: corepack enable && yarn && yarn build
 
       - uses: actions/checkout@v2
         name: copy dist folder
         env:
           SRC_FOLDER_PATH: 'dist'
           TARGET_BRANCH: 'prod'
-        run: files=$(find $SRC_FOLDER_PATH -type f)
-        run: git config --global user.name 'GitHub Action'
-        run: git config --global user.email 'action@github.com'
-        run: git fetch
-        run: git checkout $TARGET_BRANCH
-        run: git checkout ${GITHUB_REF##*/} -- $files
-        run: git add -A
-        run: git diff-index --quiet HEAD ||  git commit -am "deploy files"
-        run: git push origin $TARGET_BRANCH
+        run: |
+          files=$(find $SRC_FOLDER_PATH -type f)
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git fetch
+          git checkout $TARGET_BRANCH
+          git checkout ${GITHUB_REF##*/} -- $files
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "deploy files"
+          git push origin $TARGET_BRANCH
 
