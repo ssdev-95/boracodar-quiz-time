@@ -13,4 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo The PR was merged by ${github.actor}
+        echo The PR was merged by ${{ github.actor }}
+
