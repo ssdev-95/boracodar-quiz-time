@@ -13,9 +13,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: |
+      - name: build
+        run: |
           corepack enable
           yarn
           yarn build
-      - run: ls -la jobs.test.outputs.dist
+      - run: ls -la steps.build.outputs.dist
 
