@@ -1,5 +1,7 @@
 # Deploy on github pages
 
+name: Deploy Github Pages
+
 on:
   pull_request:
     types:
@@ -7,39 +9,30 @@ on:
     branches:
       - main
 
+permissions:
+  content: write
+
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: pre deploy
-        run: echo The PR was merged by ${{ github.actor }}
-
-      - uses: actions/checkout@v2
+      - name: setup actions
+        uses: actions/checkout@v2
 
       - name: setup node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
       
-      - name: then builds
+      - name: build phase
         run: |
           corepack enable
           yarn
           yarn build
 
-      - name: copy dist folder
-        env:
-          SRC_FOLDER_PATH: 'dist'
-          TARGET_BRANCH: 'prod'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f)
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch
-          git checkout --orphan $TARGET_BRANCH
-          git checkout ${GITHUB_REF##*/} -- $files
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"
-          git push origin $TARGET_BRANCH
+      - name: deploy phase
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
 
