@@ -18,5 +18,5 @@ jobs:
           corepack enable
           yarn
           yarn build
-      - run: ls -la steps.build.outputs.dist
+      - run: mv dist xSallus/boracodar-quiz-time/tree/prod
 
