@@ -23,5 +23,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - run: ls -la /
+      - run: ls .
 
