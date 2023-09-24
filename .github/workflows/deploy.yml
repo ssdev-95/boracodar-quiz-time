@@ -12,9 +12,24 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Before deploy
+      - name: pre depçoy
         run: echo The PR was merged by ${{ github.actor }}
 
+  then_builds:
+    runs-on: ubuntu-latest
+    step:
+      - uses: actions/setup-node@v3
+      - name: build
+        with:
+          node-version: '18'
+        run: |
+          corepack enable
+          yarn
+          yarn build
+
+  then_sends_to_prod_branch:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v2
       - name: copy
         env:
