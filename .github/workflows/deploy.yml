@@ -17,7 +17,7 @@ jobs:
 
   then_builds:
     runs-on: ubuntu-latest
-    step:
+    steps:
       - uses: actions/setup-node@v3
       - name: build
         with:
