@@ -18,8 +18,8 @@ jobs:
   then_builds:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v3
       - name: build
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
         run: corepack enable
@@ -29,24 +29,18 @@ jobs:
   then_sends_to_prod_branch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: copy
+      - uses: actions/checkout@v2
         env:
           SRC_FOLDER_PATH: 'dist'
           TARGET_BRANCH: 'prod'
-        # get the file list
         run: files=$(find $SRC_FOLDER_PATH -type f)
         run: git config --global user.name 'GitHub Action'
         run: git config --global user.email 'action@github.com'
-        # fetch branches
         run: git fetch
-        # checkout to your branch
         run: git checkout $TARGET_BRANCH
         run: git checkout ${GITHUB_REF##*/} -- $files
         run: git add -A
-        # copy files from the source branch
         run: git diff-index --quiet HEAD ||  git commit -am "deploy files"
-        # commit to the repository (ignore if no modification)
         run: git push origin $TARGET_BRANCH
-        # push to remote branch
 
