@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Before deploy
-      - run: |
+        run: |
         echo The PR was merged by ${{ github.actor }}
 
       - uses: actions/checkout@v2
