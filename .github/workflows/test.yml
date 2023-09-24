@@ -17,5 +17,5 @@ jobs:
           corepack enable
           yarn
           yarn build
-      - run: ls -la .
+      - run: ls -la jobs.test.outputs.dist
 
