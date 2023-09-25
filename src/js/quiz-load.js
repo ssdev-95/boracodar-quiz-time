@@ -1,5 +1,10 @@
+/**
+ *
+ **/
 
-import { fetchQuestions } from './fetch'
+import { fetchQuestions, quizState, questions } from './fetch'
+import { loadIcons } from './lucide';
+import { handleQuizCompletion } from './quiz-take';
 
 export async function loadQuiz() {
 	const questions = await fetchQuestions();
@@ -8,26 +13,16 @@ export async function loadQuiz() {
 	const content = document.getElementById('content')
 	content.innerText = ''
 
-	questions.forEach((question, index) => {
-		content.appendChild(
-			renderQuestion({ ...question, index })
-		)
-	})
-	const footer = document.createElement('footer')
-	footer.setAttribute('id', 'footer')
-	footer.innerHTML = `
-	  <strong>
-		  <span>1</span>/5
-		</strong>
+	const step = quizState.step -1
+	content.appendChild(
+		renderQuestion({ ...questions[step], step })
+	)
 
-		<button disabled id="next-question__icon">
-		  <i data-lucide="chevron-right"></i>
-		</button>
-	`
-	document.getElementById('app').appendChild(footer)
+	document.getElementById('step').innerText = quizState.step
+	document.getElementById('questions-count').innerText = questions.length
 }
 
-function renderQuestion({ id, question, correctAnswer, incorrectAnswers, index }) {
+function renderQuestion({ id, question, correctAnswer, incorrectAnswers, step }) {
 	const alternatives = [
 		...incorrectAnswers,
 		correctAnswer
@@ -38,7 +33,7 @@ function renderQuestion({ id, question, correctAnswer, incorrectAnswers, index }
 	questionForm.setAttribute('name', id)
 	questionForm.setAttribute('id', id)
 
-	const qIdentifier = `question-00${index}`
+	const qIdentifier = `question-00${step}`
 
 	const questionBody = `
 	  <header class="question-form__header">
@@ -88,3 +83,22 @@ function renderAnswer(name, answer) {
 
 	return answerBody
 }
+
+function handleShowQuizSummary() {
+	const content = document.getElementById('content')
+	content.innerHTML = `
+	  <span>Showing quiz summary</span>
+	`
+	localStorage.clear()
+}
+
+export function updateUI() {
+	if(quizState.step >= questions.lengtg) {
+		handleShowQuizSummary()
+	} else {
+	  loadQuiz()
+		  .then(loadIcons)
+		.finally(handleQuizCompletion)
+	}
+}
+
