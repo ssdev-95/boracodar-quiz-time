@@ -5,20 +5,22 @@
 
 import { questions } from "./fetch"
 
-const form = document.querySelector('form')
+const forms = document.querySelectorAll('form')
 
-form.addEventListener('submit', (e) => {
-	e.preventDefault()
-	const data = new FormData(form)
+forms.forEach(form => {
+  form.addEventListener('submit', (e) => {
+  	e.preventDefault()
+  	const data = new FormData(form)
 	
-	for(const	[inputname] of data) {
-		const index = inputname.replace('question-00','')
-		const { correctAnswer } = questions[+index]
-		handleShowAnswerCorrectness({
-			inputname,
-			correctAnswer
-		})
-	}
+  	for(const	[inputname] of data) {
+  		const index = inputname.replace('question-00','')
+  		const { correctAnswer } = questions[+index]
+  		handleShowAnswerCorrectness({
+  			inputname,
+  			correctAnswer
+  		})
+  	}
+  })
 })
 
 function handleShowAnswerCorrectness({
