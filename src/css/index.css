@@ -105,6 +105,8 @@ html {
 
 	> strong {
 		font-weight: 400;
+		display: flex;
+		align-items: center;
 
 		> span {
 			font-size: 1.35rem;

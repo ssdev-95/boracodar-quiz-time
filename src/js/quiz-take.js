@@ -3,29 +3,28 @@
  *
 **/
 
-import { questions } from "./fetch"
+import { questions, quizState, updateQuizState } from './fetch'
+import { updateUI } from './quiz-load'
 
-const forms = document.querySelectorAll('form')
-
-forms.forEach(form => {
-  form.addEventListener('submit', (e) => {
-  	e.preventDefault()
-  	const data = new FormData(form)
+function handleSubmit(event) {
+  event.preventDefault()
+	const data = new FormData(event.target)
 	
-  	for(const	[inputname] of data) {
-  		const index = inputname.replace('question-00','')
-  		const { correctAnswer } = questions[+index]
-  		handleShowAnswerCorrectness({
-  			inputname,
-  			correctAnswer
-  		})
-  	}
-  })
-})
+  for(const	[inputname] of data) {
+  	const index = +inputname.replace('question-00','')
+  	const { correctAnswer } = questions[index]
+		handleShowAnswerCorrectness({
+			inputname,
+  		correctAnswer,
+			index
+  	})
+  }
+}
 
 function handleShowAnswerCorrectness({
 	  inputname,
-  	correctAnswer
+  	correctAnswer,
+	  index
 }) {
 	const radiogroup = document
 		.querySelectorAll(`input[name=${inputname}`)
@@ -36,12 +35,15 @@ function handleShowAnswerCorrectness({
 		
 		if(!checked) return;
 
-		radio.setAttribute(
-			'data-correct',
-			value === correctAnswer
-	  )
+		const isCorrect = value === correctAnswer
 
-		if(value === correctAnswer) {
+		radio.setAttribute('data-correct', isCorrect)
+		quizState.step += 1
+		quizState.answers[index] = isCorrect ? 'correct' : 'incorrect'
+		
+		updateQuizState()
+
+		if(isCorrect) {
 			handleUpdateQuizDoneCountBadge()
 		}
 	})
@@ -62,8 +64,22 @@ function handleUpdateQuizDoneCountBadge() {
 	quizCount.innerText = count
 }
 
-document.getElementById('next-question__icon')
-  .addEventListener('click', () => {
-		alert('Carregando proxima questao, aguarde!!')
-	})
+async function handleLoadNextQuestion() {
+	updateUI()
+}
+
+export function handleQuizCompletion() {
+	const form = document.querySelector('form')
+
+	console.log('Deu boa!')
+
+	form.addEventListener('submit', handleSubmit)
+
+	const nextQuestionIcon = document
+		.getElementById('next-question__icon')
+
+	nextQuestionIcon
+		.addEventListener('click', handleLoadNextQuestion)
+	nextQuestionIcon.setAttribute('disabled', undefined)
+}
 
