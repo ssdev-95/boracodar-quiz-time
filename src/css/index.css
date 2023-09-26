@@ -71,6 +71,7 @@ html {
 	color: var(--green-100);
 }
 
+#header > button,
 #quiz-done-count__badge {
 	color: var(--gray-100);
 	border: 1px solid var(--gray-100);
@@ -90,6 +91,13 @@ html {
 	}
 }
 
+
+#header > button {
+	background-color: #00000000;
+	color: var(--gray-50);
+	border: 1px solid var(--gray-50);
+}
+
 #content {
 	width: 100%;
 	flex: 1;
@@ -97,6 +105,7 @@ html {
 
 #footer {
 	width: 100%;
+	flex: none;
 	padding-block: 1.5rem;
 
 	display: flex;

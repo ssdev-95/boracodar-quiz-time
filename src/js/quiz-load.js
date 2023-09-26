@@ -85,15 +85,50 @@ function renderAnswer(name, answer) {
 }
 
 function handleShowQuizSummary() {
+	console.log(quizState)
 	const content = document.getElementById('content')
-	content.innerHTML = `
-	  <span>Showing quiz summary</span>
+
+	document.getElementById('footer').innerHTML = ''
+	
+	const header = document.getElementById('header')
+	header.querySelector('div[role=badge]').remove()
+
+	const reloadQuizButton = document.createElement('button')
+	reloadQuizButton.setAttribute('id','quiz-done-count__badge')
+	reloadQuizButton.innerHTML = `
+	  <i data-lucide="rotate-ccw"></i>
 	`
-	localStorage.clear()
+	header.appendChild(reloadQuizButton)
+
+	content.innerHTML = `
+	  <strong class="text-lg" id="post-quiz__title">
+		  Showing quiz summary
+		</strong>
+
+		<div id="post-quiz__summary">
+		  ${questions.map((question, idx)=>`
+				<div class="quiz-summary__item" data-state="${quizState.answers[idx]}">
+				  <strong>${idx+1}) ${question.question.text}</strong>
+
+					<i data-lucide="${
+						quizState.answers[idx] === 'correct' ?
+							'check' : 'x'
+					}"></i>
+				</div>
+			`).join('\n')}
+		</div>
+	`
+	
+	loadIcons()
+	
+	reloadQuizButton.addEventListener('click', () => {
+  	localStorage.clear()
+		location.reload()
+	})
 }
 
 export function updateUI() {
-	if(quizState.step >= questions.lengtg) {
+	if(quizState.step > questions.length) {
 		handleShowQuizSummary()
 	} else {
 	  loadQuiz()
