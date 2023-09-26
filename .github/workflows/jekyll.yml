@@ -3,7 +3,8 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  push:
+  pull-request:
+    types: [closed]
     branches: [$default-branch]
 
   workflow_dispatch:
@@ -19,7 +20,7 @@ concurrency:
 
 jobs:
   build:
-    #if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
