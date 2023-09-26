@@ -4,7 +4,8 @@ name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
   pull_request:
-    types: [closed]
+    types: 
+      - closed
     branches: [$default-branch]
 
   workflow_dispatch:
