@@ -6,7 +6,8 @@ on:
   pull_request:
     types: 
       - closed
-    branches: [$default-branch]
+    branches: #[$default-branch]
+      - main
 
   workflow_dispatch:
 
