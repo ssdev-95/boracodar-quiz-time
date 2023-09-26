@@ -3,7 +3,7 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  pull-request:
+  pull_request:
     types: [closed]
     branches: [$default-branch]
 
