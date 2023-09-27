@@ -1,10 +1,7 @@
 /**
  *
- * Main js file
  **/
 
-import './src/css/reset.css'
-import './src/css/index.css'
 import './src/css/quiz.css'
 
 import './src/js/eruda'
@@ -12,23 +9,28 @@ import { loadIcons } from './src/js/lucide'
 import { quizState } from './src/js/fetch'
 import { loadQuiz } from './src/js/quiz-load'
 import { handleQuizCompletion } from './src/js/quiz-take'
+import { renderSimpleTemplate } from './src/js/render'
 
-document.querySelector('#app').innerHTML = `
+const appTemplate = `
 	<header id="header">
 	  <strong role="title" class="text-xl">
 		  👋 Quiz<span>.time</span>
 		</strong>
 
-		<div role="badge" data-done-quizes="false" id="quiz-done-count__badge">
+		<!--div role="badge" data-done-quizes="false" id="quiz-done-count__badge">
 		  <i data-lucide="check"></i>
 			<span class="text-lg" id="quiz-done__count">
 			  0
 			</span>
-		</div>
+		</div-->
   </header>
 
 	<main id="content">
-	  <span id="loading" class="text-md">loading</span>
+	  <div id="loading">
+		  <div id="loader-spinner__outter" >
+			  <div id="loader-spinner__inner" />
+			</div>
+		</div>
 	</main>
 
 	<footer id="footer">
@@ -45,9 +47,10 @@ document.querySelector('#app').innerHTML = `
 `
 
 window.onload = () => {
+	renderSimpleTemplate('#app', appTemplate)
 	loadQuiz()
 		.then(loadIcons)
-	  .finally(()=>{
+		.finally(()=>{
 			handleQuizCompletion()
 			const correctAnswersCount = quizState.answers
 				.reduce((prev, curr) => {

@@ -37,8 +37,7 @@ export async function fetchQuestions() {
 				JSON.stringify(quizState)
 			)
 		}
-
-		return questions
+		return
 	}
 
 	const response = await fetch(`${API_URL}${limit}`)
@@ -55,7 +54,7 @@ export async function fetchQuestions() {
 		JSON.stringify(quizState)
 	)
 
-	return questions;
+	return
 }
 
 export function updateQuizState() {
