@@ -35,8 +35,21 @@ html {
 }
 
 #loading {
-	text-align: center;
-	margin-top: 3rem;
+	max-width: 100%;
+	min-width: 100%;
+
+	min-height: 100%;
+	padding-top: 25vh;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3rem;
+
+	& > span {
+		font-size: 2rem;
+		font-weight: 700;
+	}
 }
 
 #app {
@@ -142,6 +155,36 @@ html {
 
 	&:disabled {
 		filter: brightness(.5);
+	}
+}
+
+#loader-spinner__outter {
+	width: 6rem;
+	height: 6rem;
+
+	border-radius: 160px;
+	background-image: linear-gradient(to bottom, var(--green-100), var(--green-200) 35%, #00000000 80%);
+
+
+	animation: SPIN 2s infinite cubic-bezier(0.45, 0.45, 0.45, 0.45);
+
+	padding: .25rem;
+}
+
+#loader-spinner__inner {
+	width: 100%;
+	height: 100%;
+	border-radius: inherit;
+	background-color: var(--gray-500);
+}
+
+@keyframes SPIN {
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
 	}
 }
 

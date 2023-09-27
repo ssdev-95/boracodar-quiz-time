@@ -178,6 +178,10 @@
 	&[data-state=incorrect] {
 		color: var(--red-200);
 	}
+
+	&[data-state=undefined] {
+		color: var(--gray-100);
+	}
 }
 
 .quiz-summary__item > strong {
