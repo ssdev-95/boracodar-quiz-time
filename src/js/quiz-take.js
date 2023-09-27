@@ -69,11 +69,12 @@ async function handleLoadNextQuestion() {
 }
 
 export function handleQuizCompletion() {
-	const form = document.querySelector('form')
+	const form = document.querySelector('.question__form')
 
 	console.log('Deu boa!')
 
-	form.addEventListener('submit', handleSubmit)
+	!!form && form
+		.addEventListener('submit', handleSubmit)
 
 	const nextQuestionIcon = document
 		.getElementById('next-question__icon')

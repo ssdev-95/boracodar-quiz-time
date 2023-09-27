@@ -5,7 +5,9 @@
 import {
 	createIcons,
 	ChevronRight,
+	RotateCcw,
 	Check,
+	Minus,
 	X
 } from 'lucide'
 
@@ -14,7 +16,9 @@ export function loadIcons() {
 		icons: {
 			X,              //data-lucide="x"
 			ChevronRight,   //data-lucide="chevron-right"
-			Check           //data-lucide="check"
+			RotateCcw,      //data-lucide="rotate-ccw"
+			Check,          //data-lucide="check"
+			Minus           //data-lucide="minus"
 		}
 	});
 }

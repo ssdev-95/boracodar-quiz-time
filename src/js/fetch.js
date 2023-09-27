@@ -4,7 +4,7 @@
 
 const API_URL = 'https://the-trivia-api.com/v2/questions?limit='
 const questionStorageKey = 'quiz@questions__v1'
-const quizStorageKey = 'quiz@state__v1'
+export const quizStorageKey = 'quiz@state__v1'
 
 export let questions = []
 
@@ -37,8 +37,7 @@ export async function fetchQuestions() {
 				JSON.stringify(quizState)
 			)
 		}
-
-		return questions
+		return
 	}
 
 	const response = await fetch(`${API_URL}${limit}`)
@@ -55,7 +54,7 @@ export async function fetchQuestions() {
 		JSON.stringify(quizState)
 	)
 
-	return questions;
+	return
 }
 
 export function updateQuizState() {
