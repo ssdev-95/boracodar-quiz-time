@@ -4,7 +4,7 @@
 
 const API_URL = 'https://the-trivia-api.com/v2/questions?limit='
 const questionStorageKey = 'quiz@questions__v1'
-const quizStorageKey = 'quiz@state__v1'
+export const quizStorageKey = 'quiz@state__v1'
 
 export let questions = []
 

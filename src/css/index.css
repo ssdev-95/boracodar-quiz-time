@@ -84,7 +84,7 @@ html {
 	color: var(--green-100);
 }
 
-#quiz-done-reload__button,
+#quiz-done-restart__button,
 #quiz-done-count__badge {
 	color: var(--gray-100);
 	border: 1px solid var(--gray-100);

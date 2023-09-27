@@ -5,7 +5,7 @@
 import {
 	quizState,
 	questions,
-	fetchQuestions
+	quizStorageKey
 } from './fetch'
 
 import { loadIcons } from './lucide';
@@ -22,13 +22,6 @@ import {
 } from './template-gen';
 
 export async function loadQuiz() {
-	await fetchQuestions();	
-
-	/*if(quizState.answers.length === questions.length) {
-		handleShowQuizSummary()
-		return
-	}*/
-
 	const correctAnswersCount = quizState
 		.answers
 		.reduce((prev, curr) => {
@@ -81,14 +74,15 @@ export function handleShowQuizSummary() {
 	renderSimpleTemplate('#footer', '')
 
 	const header = document.getElementById('header')
-	header.querySelector('div[role=badge]').remove()
+	const badge = header.querySelector('div[role=badge]')
+	!!badge && badge.remove()
 
 	renderElement({
 		source: 'button',
 		target: header,
 		template: '<i data-lucide="rotate-ccw"></i>',
 		props: {
-			id: 'quiz-done-reload__button'
+			id: 'quiz-done-restart__button'
 		}
 	})
 
@@ -99,9 +93,25 @@ export function handleShowQuizSummary() {
 
 	loadIcons()
 
+	renderElement({
+		source: 'button',
+		target: document.getElementById('footer'),
+		template: '<strong>Start new Quiz</strong>',
+		props: {
+			id: 'quiz-start-new__button'
+		}
+	})
+
 	document
-		.getElementById('quiz-done-reload__button')
+		.getElementById('quiz-done-restart__button')
 		.addEventListener('click', () => {
+			localStorage.removeItem(quizStorageKey)
+			location.reload()
+		})
+
+	document
+		.getElementById('quiz-start-new__button')
+	  .addEventListener('click', () => {
 			localStorage.clear()
 			location.reload()
 		})
